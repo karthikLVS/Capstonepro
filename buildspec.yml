@@ -1,12 +1,18 @@
 version: 0.2
+
 phases:
   install:
     commands:
       - pip install -r user-service/requirements.txt
       - npm install --prefix order-service
       - cd payment-service && go mod download
+
   build:
     commands:
-      - cd user-service && pytest
-      - cd ../order-service && npm test
-      - cd ../payment-service && go test ./...
+      - pytest user-service
+      - npm test --prefix order-service
+      - cd payment-service && go test ./...
+
+artifacts:
+  files:
+    - '**/*'
