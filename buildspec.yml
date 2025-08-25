@@ -3,15 +3,23 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo "Listing root directory:"
+      - ls -al
+      - echo "Installing Python dependencies..."
       - pip install -r user-service/requirements.txt
+      - echo "Installing Node.js dependencies..."
       - npm install --prefix order-service
-      - cd payment-service && go mod download
+      - echo "Downloading Go modules..."
+      - (cd payment-service && go mod download)
 
   build:
     commands:
-      - pytest ../user-service
-      - npm test --prefix ../order-service
-      - go test ./...
+      - echo "Running Python tests..."
+      - pytest user-service
+      - echo "Running Node.js tests..."
+      - npm test --prefix order-service
+      - echo "Running Go tests..."
+      - (cd payment-service && go test ./...)
 
 artifacts:
   files:
