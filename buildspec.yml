@@ -9,10 +9,6 @@ phases:
 
   build:
     commands:
-      - pytest user-service
+      - pytest ./user-service
       - npm test --prefix order-service
       - cd payment-service && go test ./...
-
-artifacts:
-  files:
-    - '**/*'
