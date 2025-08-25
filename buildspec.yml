@@ -18,8 +18,9 @@ phases:
     commands:
       - echo Running Python tests...
       - cd user-service && pytest && cd ..
+      
       - echo Running Node.js tests...
       - npm test --prefix order-service
+      
       - echo Running Go tests...
       - cd payment-service && go test ./... && cd ..
-
