@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - cd user-service
+      - pip install -r requirements.txt
+      - cd ../order-service
+      - npm install
+      - cd ../payment-service
+      - go mod download
+  build:
+    commands:
+      - cd user-service
+      - pytest
+      - cd ../order-service
+      - npm test
+      - cd ../payment-service
+      - go test ./...
