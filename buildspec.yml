@@ -4,9 +4,9 @@ phases:
     commands:
       - pip install -r user-service/requirements.txt
       - npm install --prefix order-service
-      - go mod download --directory payment-service
+      - cd payment-service && go mod download
   build:
     commands:
-      - pytest user-service
-      - npm test --prefix order-service
-      - go test ./... --directory payment-service
+      - cd user-service && pytest
+      - cd ../order-service && npm test
+      - cd ../payment-service && go test ./...
